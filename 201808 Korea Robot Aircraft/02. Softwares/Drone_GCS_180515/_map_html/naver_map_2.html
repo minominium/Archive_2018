@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+ <title>naver map 2</title>
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=h1wZoawLcOs4xw2HCZsG&submodules=geocoder&callback=initMap"></script>
+</head>
+<body>
+<div id="map" style="width:1000px;height:500px;"></div>
+
+<script>
+
+var map;
+
+function initMap(){
+
+    var mapOptions = {
+        center: new naver.maps.LatLng(37.169500  , 128.472500),
+        zoom: 11
+    };
+    map = new naver.maps.Map('map', mapOptions);
+    
+    map.setMapTypeId(naver.maps.MapTypeId["HYBRID"]);
+    map.setOptions("mapTypeControl", true); //지도 유형 컨트롤의 표시 여부
+    map.setOptions({ //지도 인터랙션 켜기
+        draggable: true,
+        pinchZoom: true,
+        scrollWheel: true,
+        keyboardShortcuts: true,
+        disableDoubleTapZoom: false,
+        disableDoubleClickZoom: false,
+        disableTwoFingerTapZoom: false
+    });
+    map.setOptions("disableKineticPan", false);
+
+}
+
+function addMarker(lat, lng){
+    
+    var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(lat, lng),
+        map: map,
+        icon: {
+            url: 'pin.png', //50, 68 크기의 원본 이미지
+            size: new naver.maps.Size(32, 42),
+            scaledSize: new naver.maps.Size(27, 37),
+            origin: new naver.maps.Point(0, 0),
+            anchor: new naver.maps.Point(12, 34)
+        }
+    });
+    
+    map.setCenter(new naver.maps.LatLng(lat, lng));
+    
+    markerList.push(marker);
+    
+}
+
+function noflyMarker(lat, lng, rad){
+    
+    var marker = new naver.maps.Marker({
+        position: new naver.maps.LatLng(lat, lng),
+        map: map,
+        icon: {
+            url: 'TAR_Exclamation_icon.png', //50, 68 크기의 원본 이미지
+            size: new naver.maps.Size(20, 20),
+            scaledSize: new naver.maps.Size(20, 20),
+            origin: new naver.maps.Point(0, 0),
+            anchor: new naver.maps.Point(12, 34)
+        }
+    });
+    var circle = new naver.maps.Circle({
+        strokeColor: '#0000ff',
+        strokeOpacity: 0.8,
+        strokeWeight: 2,
+        fillColor: '#0000ff',
+        fillOpacity: 0.35,
+        center: new naver.maps.LatLng(lat, lng),
+        radius: rad,
+        zIndex: 100,
+        clickable: true,
+        map: map
+    });
+    map.setCenter(new naver.maps.LatLng(lat, lng));
+    
+    markerList.push(marker);
+    
+}
+</script>
+</body>
+</html>

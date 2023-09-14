@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <meta charset="UTF-8">
+      <title>Map</title>
+      <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?clientId=rOXGZmMVD0VR7x12Ysq2&submodules=geocoder"></script>
+  </head>
+  <body>
+    <div id="map" style="width:1050px;height:750px;"></div>
+    <script type="text/javascript">    
+        var map = new naver.maps.Map('map', {
+            center: new naver.maps.LatLng(37.557672, 126.926393),
+            zoom: 13
+        });
+
+        var HOME_PATH = window.HOME_PATH || '.';
+
+        var markerOption = {
+            position: new naver.maps.LatLng(37.557672, 126.926393),
+            map: map,
+            icon: {
+                url: HOME_PATH + '/car_marker.png',
+                size: new naver.maps.Size(50, 50),
+                origin: new naver.maps.Point(0, 0),
+                anchor: new naver.maps.Point(25,25)
+            }
+        }
+        var marker = new naver.maps.Marker(markerOption);  
+ 
+        function setnaverpos(lat, lng) {
+            var current = new naver.maps.LatLng(lat, lng);
+            this.map.setCenter(current);
+            this.marker.setPosition(current);
+        }	
+      </script>
+  </body>
+</html>

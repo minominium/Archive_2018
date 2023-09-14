@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>naver_map_1.html</file>
+        <file>naver_map_2.html</file>
+    </qresource>
+</RCC>
